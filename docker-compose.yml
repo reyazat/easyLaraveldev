@@ -15,7 +15,7 @@ services:
       - APP_ENV=${APP_ENV}
       - APP_DEBUG=${APP_DEBUG}
     networks:
-      - ${APP_NAME}_network
+      - laravel_network
     depends_on:
       - db
       - redis
@@ -29,7 +29,7 @@ services:
     ports:
       - "${APP_PORT}:80"
     networks:
-      - ${APP_NAME}_network
+      - laravel_network
     depends_on:
       - app
 
@@ -47,7 +47,7 @@ services:
     ports:
       - "${DB_PORT}:3306"
     networks:
-      - ${APP_NAME}_network
+      - laravel_network
 
   redis:
     image: redis:alpine
@@ -58,7 +58,7 @@ services:
       
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
     networks:
-      - ${APP_NAME}_network
+      - laravel_network
 
 volumes:
   dbdata:
@@ -67,5 +67,5 @@ volumes:
     driver: local
 
 networks:
-  ${APP_NAME}_network:
+  laravel_network:
     driver: bridge
